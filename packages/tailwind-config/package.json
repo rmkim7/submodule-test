@@ -9,7 +9,7 @@
   "exports": {
     "./tailwindConfig": "./tailwind.config.cjs",
     "./postcssConfig": "./postcss.config.cjs",
-    "./styles": "./styles.css"
+    "./styles": "./styles.tsx"
   },
   "keywords": [],
   "author": "",
