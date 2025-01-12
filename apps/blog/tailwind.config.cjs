@@ -6,6 +6,6 @@ module.exports = {
   ...config,
   content: [
     path.resolve(__dirname, "./app/**/*.{tsx,jsx,ts,js,mdx}"),
-    path.resolve(__dirname, "../../packages/ui/**/*.{tsx,jsx,ts,js,mdx}"),
+    path.resolve(__dirname, "../../packages/ui/src/**/*.{tsx,jsx,ts,js,mdx}"),
   ],
 };
