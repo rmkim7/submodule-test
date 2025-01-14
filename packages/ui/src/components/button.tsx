@@ -3,10 +3,21 @@
 import { ReactNode } from "react";
 
 interface ButtonProps {
+  divClassName?: string;
+  buttonClassName?: string;
   children: ReactNode;
-  className?: string;
 }
 
-export const Button = ({ children, className }: ButtonProps) => {
-  return <button className={className}>{children}</button>;
+const Button: React.FC<ButtonProps> = ({
+  divClassName = "",
+  buttonClassName = "",
+  children,
+}) => {
+  return (
+    <div className={divClassName}>
+      <button className={buttonClassName}>{children}</button>
+    </div>
+  );
 };
+
+export default Button;

@@ -1,5 +1,6 @@
 import { fetchPosts } from "@/apis/posts";
 import Link from "next/link";
+import Button from "@repo/ui/components/button";
 
 export default async function Home() {
   const fetchList = await fetchPosts();
@@ -8,13 +9,13 @@ export default async function Home() {
 
   return (
     <>
-      <div className="text-right mr-8">
-        <Link href="/posts/write">
-          <button className="bg-black text-white text-semibold text-base p-3 rounded-lg">
-            새 글 작성
-          </button>
-        </Link>
-      </div>
+      <Button
+        divClassName="text-right mr-8"
+        buttonClassName="bg-black text-white font-semibold text-base p-3 rounded-lg"
+      >
+        <Link href="/posts/write">새 글 작성</Link>
+      </Button>
+
       <div className="border-gray-400 w-80 h-96"></div>
     </>
   );
