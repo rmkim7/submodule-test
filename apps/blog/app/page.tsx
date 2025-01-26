@@ -1,6 +1,7 @@
 import { fetchPosts } from "@/apis/posts";
 import Link from "next/link";
 import Button from "@repo/ui/components/button";
+import { formatToLocaleDate } from "@/functions/formatDate";
 
 export default async function Home() {
   const postList = await fetchPosts();
@@ -14,11 +15,16 @@ export default async function Home() {
       >
         <Link href="/posts/write">새 글 작성</Link>
       </Button>
-      <h2 className="mx-8 mt-8 mb-8 font-semibold">목록</h2>
+      {/*조건부 렌더링 - 게시글이 없는 경우 / 게시글이 있는 경우*/}
+      {postList.length === 0 ? (
+        <h2 className="mx-8 mt-8 mb-4 font-semibold">
+          등록된 게시글이 없습니다
+        </h2>
+      ) : (
+        <h2 className="mx-8 mt-8 mb-4 font-semibold">게시글 목록</h2>
+      )}
       {postList.map(({ id, title, content, author, createdAt }) => {
-        const date = new Date(createdAt);
-        const localCreatedAt = date.toLocaleString("ko-KR");
-
+        const localeCreatedAt = formatToLocaleDate(createdAt);
         return (
           <div
             key={id}
@@ -33,7 +39,7 @@ export default async function Home() {
                 <span className="border border-gray-300 bg-gray-300 px-2 py-0.5 rounded italic">
                   {author}
                 </span>
-                <time>{localCreatedAt}</time>
+                <time>{localeCreatedAt}</time>
               </div>
             </Link>
           </div>

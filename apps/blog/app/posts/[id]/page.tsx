@@ -1,5 +1,6 @@
 import { createComment, fetchComments } from "@/apis/comments";
 import { searchPost } from "@/apis/posts";
+import { formatToLocaleDate } from "@/functions/formatDate";
 import Button from "@repo/ui/components/button";
 import Form from "next/form";
 import Link from "next/link";
@@ -7,18 +8,22 @@ import Link from "next/link";
 export default async function PostDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
   const id = (await params).id;
 
   const blogPost = await searchPost(id);
+  console.log(blogPost);
+
+  // 게시글 작성일자 현지화
+  const localeCreatedAt = formatToLocaleDate(blogPost.createdAt);
 
   async function createCommentAction(formData: FormData) {
     "use server";
     const content = formData.get("content") as string;
     const author = formData.get("author") as string;
 
-    const commentDetail = await createComment(id, { content, author });
+    await createComment(id, { content, author });
   }
 
   const commentList = await fetchComments(id);
@@ -61,7 +66,7 @@ export default async function PostDetailPage({
           <span className="border border-gray-300 bg-gray-300 px-2 py-0.5 rounded italic">
             {blogPost.author}
           </span>
-          <span>{blogPost.createdAt.slice(0, 10)}</span>
+          <span>{localeCreatedAt}</span>
         </div>
       </div>
       <Form
@@ -90,20 +95,25 @@ export default async function PostDetailPage({
         </Button>
       </Form>
       {/*조건부 렌더링 - 댓글이 없는 경우 / 댓글이 있는 경우*/}
-      <label className="mx-8 font-semibold">댓글 목록</label>
+      {commentList.length === 0 ? null : (
+        <h2 className="mx-8 mt-8 mb-4 font-semibold">댓글 목록</h2>
+      )}
+
       {commentList.map(({ id, content, author, createdAt }) => {
-        const date = new Date(createdAt);
-        const localCreatedAt = date.toLocaleString("ko-KR");
+        {
+          /*댓글 작성일자 현지화*/
+        }
+        const localeCreatedAt = formatToLocaleDate(createdAt);
 
         return (
           <li
             key={id}
             className="border border-gray-200 mx-8 my-4 p-1 rounded italic flex flex-col"
           >
-            <h3 className="border bg-gray-300 w-fit">{author}</h3>
+            <h3 className="border rounded bg-gray-300 w-fit">{author}</h3>
             <hr />
             <p className="mt-2">{content}</p>
-            <time>{localCreatedAt}</time>
+            <time>{localeCreatedAt}</time>
           </li>
         );
       })}
