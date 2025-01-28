@@ -1,21 +1,25 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, MouseEventHandler } from "react";
 
 interface ButtonProps {
   divClassName?: string;
   buttonClassName?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = ({
   divClassName = "",
   buttonClassName = "",
+  onClick,
   children,
 }) => {
   return (
     <div className={divClassName}>
-      <button className={buttonClassName}>{children}</button>
+      <button onClick={onClick} className={buttonClassName}>
+        {children}
+      </button>
     </div>
   );
 };

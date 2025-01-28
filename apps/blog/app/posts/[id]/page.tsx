@@ -1,5 +1,6 @@
 import { createComment, fetchComments } from "@/apis/comments";
 import { searchPost } from "@/apis/posts";
+import PostDeleteButton from "@/app/_components/PostDeleteButton";
 import { formatToLocaleDate } from "@/utils/formatDate";
 import Button from "@repo/ui/components/button";
 import { revalidatePath } from "next/cache";
@@ -14,6 +15,7 @@ export default async function PostDetailPage({
   const id = (await params).id;
 
   const blogPost = await searchPost(id);
+  const postId = blogPost.id;
 
   // 게시글 작성일자 현지화
   const localeCreatedAt = formatToLocaleDate(blogPost.createdAt);
@@ -43,23 +45,18 @@ export default async function PostDetailPage({
           <Link href={`/`}>나가기</Link>
         </Button>
         <div className="flex gap-2">
+          <PostDeleteButton id={postId} />
           <Button
             divClassName="text-right"
             buttonClassName="border border-gray-400 bg-white text-black font-semibold text-base p-2 rounded"
           >
-            삭제
-          </Button>
-          <Button
-            divClassName="text-right"
-            buttonClassName="border border-gray-400 bg-white text-black font-semibold text-base p-2 rounded"
-          >
-            <Link href={`/posts/${blogPost.id}/edit`}>수정</Link>
+            <Link href={`/posts/${postId}/edit`}>수정</Link>
           </Button>
         </div>
       </div>
 
       <div
-        key={blogPost.id}
+        key={postId}
         className="border border-gray-400 mx-8 my-4 rounded p-4"
       >
         <h3 className="font-semibold pb-4">{blogPost.title}</h3>

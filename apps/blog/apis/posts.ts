@@ -82,3 +82,15 @@ export const updatePost = async (
 };
 
 // 게시글 삭제
+export const deletePost = async (id: string): Promise<{ message: string }> => {
+  const response = await fetch(`${BASE_URL}/posts/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+  return response.json();
+};
