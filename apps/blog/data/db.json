@@ -1,6 +1,14 @@
 {
   "posts": [
     {
+      "id": "1737982017155",
+      "title": "오늘의 목표📝",
+      "content": "게시글 수정 페이지 완성🤗\r\n\r\n목표 달성:)",
+      "author": "mint☘",
+      "createdAt": "2025-01-27T12:46:57.155Z",
+      "updatedAt": "2025-01-28T09:15:20.537Z"
+    },
+    {
       "id": "1737793081519",
       "title": "Lorem ipsum odor amet, consectetuer adipiscing elit. Platea non tempor primis duis morbi mattis nullam praesent. Libero facilisis consectetur quis faucibus posuere massa pretium lacinia integer. Sagittis mollis aptent fringilla vitae ad sodales amet.",
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -114,6 +122,41 @@
     }
   ],
   "comments": [
+    {
+      "id": "1738056669878",
+      "postId": "1737982017155",
+      "content": "Viel Glück im neuen Jahr!",
+      "author": "schön",
+      "createdAt": "2025-01-28T09:31:09.878Z"
+    },
+    {
+      "id": "1738055317514",
+      "postId": "1737982017155",
+      "content": "It's snowy",
+      "author": "snowflake",
+      "createdAt": "2025-01-28T09:08:37.514Z"
+    },
+    {
+      "id": "1738054877990",
+      "postId": "1737982017155",
+      "content": "Happy new year!",
+      "author": "설날",
+      "createdAt": "2025-01-28T09:01:17.990Z"
+    },
+    {
+      "id": "1737995038366",
+      "postId": "1737982017155",
+      "content": "2번 댓글",
+      "author": "하하하",
+      "createdAt": "2025-01-27T16:23:58.366Z"
+    },
+    {
+      "id": "1737982053521",
+      "postId": "1737982017155",
+      "content": "화이팅!",
+      "author": "1111111",
+      "createdAt": "2025-01-27T12:47:33.521Z"
+    },
     {
       "id": "1737826180044",
       "postId": "1737793081519",

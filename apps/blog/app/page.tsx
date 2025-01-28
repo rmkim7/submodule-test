@@ -1,7 +1,7 @@
 import { fetchPosts } from "@/apis/posts";
 import Link from "next/link";
 import Button from "@repo/ui/components/button";
-import { formatToLocaleDate } from "@/functions/formatDate";
+import { formatToLocaleDate } from "@/utils/formatDate";
 
 export default async function Home() {
   const postList = await fetchPosts();

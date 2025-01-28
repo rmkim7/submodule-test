@@ -60,5 +60,25 @@ export const searchPost = async (id: string): Promise<Post> => {
 };
 
 // 게시글 수정
+export const updatePost = async (
+  id: string,
+  post: UpdatePostDTO,
+): Promise<Post> => {
+  const response = await fetch(`${BASE_URL}/posts/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: post.title,
+      content: post.content,
+      author: post.author,
+    }),
+  });
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+  return response.json();
+};
 
 // 게시글 삭제

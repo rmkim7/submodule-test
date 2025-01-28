@@ -1,7 +1,8 @@
 import { createComment, fetchComments } from "@/apis/comments";
 import { searchPost } from "@/apis/posts";
-import { formatToLocaleDate } from "@/functions/formatDate";
+import { formatToLocaleDate } from "@/utils/formatDate";
 import Button from "@repo/ui/components/button";
+import { revalidatePath } from "next/cache";
 import Form from "next/form";
 import Link from "next/link";
 
@@ -13,21 +14,24 @@ export default async function PostDetailPage({
   const id = (await params).id;
 
   const blogPost = await searchPost(id);
-  console.log(blogPost);
 
   // 게시글 작성일자 현지화
   const localeCreatedAt = formatToLocaleDate(blogPost.createdAt);
+
+  const commentList = await fetchComments(id);
 
   async function createCommentAction(formData: FormData) {
     "use server";
     const content = formData.get("content") as string;
     const author = formData.get("author") as string;
 
-    await createComment(id, { content, author });
-  }
+    // 업데이된 댓글 저장
+    const updatedComment = await createComment(id, { content, author });
+    console.log(updatedComment);
 
-  const commentList = await fetchComments(id);
-  console.log(commentList);
+    // 최신 댓글 목록 가져오기
+    revalidatePath(`/posts/${id}`);
+  }
 
   return (
     <>
@@ -49,7 +53,7 @@ export default async function PostDetailPage({
             divClassName="text-right"
             buttonClassName="border border-gray-400 bg-white text-black font-semibold text-base p-2 rounded"
           >
-            수정
+            <Link href={`/posts/${blogPost.id}/edit`}>수정</Link>
           </Button>
         </div>
       </div>
@@ -106,7 +110,7 @@ export default async function PostDetailPage({
         const localeCreatedAt = formatToLocaleDate(createdAt);
 
         return (
-          <li
+          <div
             key={id}
             className="border border-gray-200 mx-8 my-4 p-1 rounded italic flex flex-col"
           >
@@ -114,7 +118,7 @@ export default async function PostDetailPage({
             <hr />
             <p className="mt-2">{content}</p>
             <time>{localeCreatedAt}</time>
-          </li>
+          </div>
         );
       })}
     </>
