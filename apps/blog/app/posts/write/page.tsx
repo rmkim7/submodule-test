@@ -21,7 +21,7 @@ export default function PostMakingPage() {
   return (
     <>
       <Button
-        divClassName="text-right mr-8"
+        divClassName="text-left ml-8 mt-8"
         buttonClassName="border border-gray-400 bg-white text-black font-semibold text-base p-2 rounded"
       >
         <Link href={`/`}>나가기</Link>

@@ -45,7 +45,7 @@ export default async function PostDetailPage({
         <div className="flex gap-2">
           <Button
             divClassName="text-right"
-            buttonClassName="bg-black text-white font-semibold text-base p-2 rounded"
+            buttonClassName="border border-gray-400 bg-white text-black font-semibold text-base p-2 rounded"
           >
             삭제
           </Button>
@@ -93,7 +93,7 @@ export default async function PostDetailPage({
         />
         <Button
           divClassName="text-right"
-          buttonClassName="border border-gray-400 bg-white text-black font-semibold text-base p-2 rounded"
+          buttonClassName="bg-black text-white font-semibold text-base p-2 rounded"
         >
           댓글 작성
         </Button>
